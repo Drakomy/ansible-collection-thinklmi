@@ -1,2 +1,3 @@
-# ansible-thinklmi
-Ansible collection for Lenovo's thinklmi
+# Ansible Collection - drakomy.thinklmi
+
+Documentation for the collection.

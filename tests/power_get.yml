@@ -1,0 +1,49 @@
+---
+- name: Test power_get module
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Read async power property
+      drakomy.thinklmi.power_get:
+        property: async
+      ignore_errors: true
+
+    - name: Read autosuspend_delay_ms power property
+      drakomy.thinklmi.power_get:
+        property: autosuspend_delay_ms
+      ignore_errors: true
+
+    - name: Read control power property
+      drakomy.thinklmi.power_get:
+        property: control
+      ignore_errors: true
+
+    - name: Read runtime_active_kids power property
+      drakomy.thinklmi.power_get:
+        property: runtime_active_kids
+      ignore_errors: true
+
+    - name: Read runtime_active_time power property
+      drakomy.thinklmi.power_get:
+        property: runtime_active_time
+      ignore_errors: true
+
+    - name: Read runtime_enabled power property
+      drakomy.thinklmi.power_get:
+        property: runtime_enabled
+      ignore_errors: true
+
+    - name: Read runtime_status power property
+      drakomy.thinklmi.power_get:
+        property: runtime_status
+      ignore_errors: true
+
+    - name: Read runtime_suspended_time power property
+      drakomy.thinklmi.power_get:
+        property: runtime_suspended_time
+      ignore_errors: true
+
+    - name: Read runtime_usage power property
+      drakomy.thinklmi.power_get:
+        property: runtime_usage
+      ignore_errors: true

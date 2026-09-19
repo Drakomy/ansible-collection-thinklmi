@@ -1,0 +1,32 @@
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+env/
+
+# Ansible
+.ansible/
+*.retry
+ansible.cfg.local
+
+# Test/build artifacts
+.coverage
+.coverage.*
+htmlcov/
+.pytype/
+.dist/
+build/
+dist/
+*.egg-info/
+
+# Editor/OS
+.vscode/
+.DS_Store

@@ -1,0 +1,19 @@
+---
+- name: Test auth_info module
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Read Admin firmware auth
+      drakomy.thinklmi.auth_get:
+        component: Admin
+        property: is_enabled
+
+    - name: Read HDD firmware auth
+      drakomy.thinklmi.auth_get:
+        component: HDD
+        property: is_enabled
+
+    - name: Read HDD max_password_length firmware auth
+      drakomy.thinklmi.auth_get:
+        component: HDD
+        property: max_password_length
