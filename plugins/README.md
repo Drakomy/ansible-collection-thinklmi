@@ -1,31 +1,60 @@
-# Collections Plugins Directory
+# ThinkLMI Plugin
 
-This directory can be used to ship various plugins inside an Ansible collection. Each plugin is placed in a folder that
-is named after the type of plugin it is in. It can also include the `module_utils` and `modules` directory that
-would contain module utils and modules respectively.
+This page documents each module in terms of the ThinkLMI data model used by the project:
 
-Here is an example directory of the majority of plugins currently supported by Ansible:
+- `category`
+- `component`
+- `property`
 
-```
-└── plugins
-    ├── action
-    ├── become
-    ├── cache
-    ├── callback
-    ├── cliconf
-    ├── connection
-    ├── filter
-    ├── httpapi
-    ├── inventory
-    ├── lookup
-    ├── module_utils
-    ├── modules
-    ├── netconf
-    ├── shell
-    ├── strategy
-    ├── terminal
-    ├── test
-    └── vars
-```
+The modules read or write values from the Linux ThinkLMI sysfs tree under `/sys/devices/virtual/firmware-attributes/thinklmi` or `/sys/class/firmware-attributes/thinklmi`.
 
-A full list of plugin types can be found at [Working With Plugins](https://docs.ansible.com/ansible-core/2.16/plugins/plugins.html).
+## attribute_get
+
+Reads a property for a component in the `attributes` category.
+
+The module expects:
+
+- `component`: the BIOS attribute name
+- `property`: the field to read, such as `current_value`, `display_name`, `possible_values`, or `type`
+
+It validates that the component exists before reading the requested property.
+
+## attribute_set
+
+Writes a value to a component in the `attributes` category.
+
+The module expects:
+
+- `component`: the BIOS attribute name
+- `value`: the new value to assign
+
+It validates the component and verifies that the value is allowed before writing it to the `current_value` property.
+
+## auth_get
+
+Reads a property for a component in the `authentication` category.
+
+The module expects:
+
+- `component`: the authentication component, such as `Admin`, `HDD`, `NVMe`, `Power-on`, or `System`
+- `property`: the field to read, such as `index`, `is_enabled`, `level`, `max_password_length`, `mechanism`, `min_password_length`, `role`
+
+## auth_set
+
+Writes an authentication property for a component in the `authentication` category.
+
+The module expects:
+
+- `component`: the authentication component
+- `property`: the field to write, such as `current_password` or `new_password`
+- `value`: the value to store
+
+## power_get
+
+Reads a property from the `power` category.
+
+The module expects:
+
+- `property`: the power value to read, such as `async`, `autosuspend_delay_ms`, `control`, `runtime_enabled`, `runtime_status`, or `runtime_usage`
+
+This module does not require a component because the power entries are global values.
