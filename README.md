@@ -6,6 +6,12 @@ This collection uses the Lenovo ThinkLMI sysfs entries already present in the Li
 
 The collection works with the existing ThinkLMI sysfs hierarchy in Linux. It does not define a new BIOS model; it exposes the kernel-managed data so it can be read and changed through Ansible.
 
+## Todo
+- check mode
+- replace static list
+- unit test
+- refactor module pattern
+
 ## Data model
 
 The Linux kernel exposes ThinkLMI values under a small hierarchy:
