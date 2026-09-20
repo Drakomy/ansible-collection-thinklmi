@@ -7,25 +7,21 @@
       drakomy.thinklmi.attribute_get:
         component: 'After Power Loss'
         property: current_value
-      ignore_errors: true
 
     - name: Read alarm date property
       drakomy.thinklmi.attribute_get:
         component: 'AlarmDate(MM\DD\YYYY)'
         property: type
-      ignore_errors: true
 
     - name: Read intel manageability control property
       drakomy.thinklmi.attribute_get:
         component: 'Intel(R) Manageability Control'
         property: possible_values
-      ignore_errors: true
 
     - name: Read usb port 4 property
       drakomy.thinklmi.attribute_get:
         component: 'USB Port 4'
         property: current_value
-      ignore_errors: true
 
     - name: Read usb port 8 property
       drakomy.thinklmi.attribute_get:

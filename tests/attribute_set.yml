@@ -7,14 +7,17 @@
       drakomy.thinklmi.attribute_set:
         component: 'USB Port 4'
         value: 'Disabled'
-      ignore_errors: true
 
     - name: Set usb port 4 Enabled
       drakomy.thinklmi.attribute_set:
         component: 'USB Port 4'
         value: 'Enabled'
-      ignore_errors: true
-    
+
+    - name: Set usb port 4 Enabled
+      drakomy.thinklmi.attribute_set:
+        component: 'USB Port 4'
+        value: 'Enabled'
+
     - name: Set usb port 4 Bruh
       drakomy.thinklmi.attribute_set:
         component: 'USB Port 4'
