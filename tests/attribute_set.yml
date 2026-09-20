@@ -1,0 +1,22 @@
+---
+- name: Test attribute_set module
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Set usb port 4 Disabled
+      drakomy.thinklmi.attribute_set:
+        component: 'USB Port 4'
+        value: 'Disabled'
+      ignore_errors: true
+
+    - name: Set usb port 4 Enabled
+      drakomy.thinklmi.attribute_set:
+        component: 'USB Port 4'
+        value: 'Enabled'
+      ignore_errors: true
+    
+    - name: Set usb port 4 Bruh
+      drakomy.thinklmi.attribute_set:
+        component: 'USB Port 4'
+        value: 'Bruh'
+      ignore_errors: true

@@ -1,0 +1,14 @@
+---
+- name: Test auth_set module
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: debug
+      ansible.builtin.debug:
+        msg: "{{ lookup('ansible.builtin.env', 'BIOS_PASSWORD') }}"
+    - name: Input bios password
+      drakomy.thinklmi.auth_set:
+        component: 'Admin'
+        property: 'current_password'
+        value: "{{ lookup('ansible.builtin.env', 'BIOS_PASSWORD') }}"
+      ignore_errors: true

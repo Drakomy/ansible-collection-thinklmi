@@ -6,6 +6,7 @@ from __future__ import annotations
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (
+    POWER_READ_PROPERTIES,
     SysFSThinkLMI,
     SysFSThinkLMIError,
 )
@@ -16,17 +17,7 @@ def main():
             "property": {
                 "type": "str",
                 "required": True,
-                "choices": [
-                    "async",
-                    "autosuspend_delay_ms",
-                    "control",
-                    "runtime_active_kids",
-                    "runtime_active_time",
-                    "runtime_enabled",
-                    "runtime_status",
-                    "runtime_suspended_time",
-                    "runtime_usage"
-                ],
+                "choices": POWER_READ_PROPERTIES
             },
             "base_path": {
                 "type": "str",
@@ -39,11 +30,17 @@ def main():
 
     try:
         client = SysFSThinkLMI(base_path=module.params["base_path"])
+        category = "power"
         property_name = module.params.get("property")
-        result = client.read_value(category="power", component=None, property_name=property_name)
+
+        result = client.read_value(
+            category=category,
+            component=None,
+            property_name=property_name
+        )
         module.exit_json(changed=False, property=property_name, result=result)
-    except SysFSThinkLMIError as exc:
-        module.fail_json(msg=str(exc))
+    except SysFSThinkLMIError as e:
+        module.fail_json(msg=str(e))
 
 
 if __name__ == "__main__":

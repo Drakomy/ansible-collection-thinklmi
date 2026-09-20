@@ -1,13 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import annotations
-
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (
     AUTH_COMPONENTS,
-    AUTH_READ_PROPERTIES,
+    AUTH_WRITE_PROPERTIES,
     SysFSThinkLMI,
     SysFSThinkLMIError,
 )
@@ -18,16 +16,16 @@ def main():
             "component": {
                 "type": "str",
                 "required": True,
-                "choices": AUTH_COMPONENTS,
+                "choices": AUTH_COMPONENTS
             },
             "property": {
                 "type": "str",
                 "required": True,
-                "choices": AUTH_READ_PROPERTIES,
+                "choices": AUTH_WRITE_PROPERTIES
             },
             "value": {
-                "type": "str",
-                "required": True,
+                "type": str,
+                "required": True
             },
             "base_path": {
                 "type": "str",
@@ -43,12 +41,13 @@ def main():
         category = "authentication"
         component = module.params["component"]
         property_name = module.params.get("property")
+        value= module.params.get("value")
 
         result = client.write_value(
             category=category,
             component=component,
             property_name=property_name,
-            value=module.params.get("value")
+            value=value
         )
         module.exit_json(
             changed=False,
