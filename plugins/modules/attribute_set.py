@@ -1,30 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import annotations
-
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (
     SysFSThinkLMI,
     SysFSThinkLMIError,
 )
-
-def _validate_component(
-    client: SysFSThinkLMI,
-    category: str,
-    component: str,
-) -> None:
-    component_list = SysFSThinkLMI.list_components(
-        category=category,
-        base_path=client.base_path,
-    )
-
-    if component not in component_list:
-        raise SysFSThinkLMIError(
-            f"Component {component} does not exist. "
-            f"List of valid components: {component_list}"
-        )
 
 def _validate_value(
     client: SysFSThinkLMI,
@@ -70,7 +52,7 @@ def main():
         property_name = "current_value"
         value = module.params.get("value")
 
-        _validate_component(
+        client.validate_component(
             client= client,
             category=category,
             component=component)
@@ -89,7 +71,7 @@ def main():
             value=value
         )
         module.exit_json(
-            changed=False,
+            changed=True,
             component=component,
             property=property_name,
             result=result

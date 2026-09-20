@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import annotations
-
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (

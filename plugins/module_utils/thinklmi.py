@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 AUTH_COMPONENTS = [
     "Admin",
@@ -75,7 +74,7 @@ class SysFSThinkLMI:
     def read_value(
         self,
         category: str,
-        component: str,
+        component: str | None,
         property_name: str,
     ) -> str:
         path = self._property_path(category, component, property_name)
@@ -120,3 +119,19 @@ class SysFSThinkLMI:
         if not root.exists():
             return []
         return sorted(item.name for item in root.iterdir() if item.is_dir())
+
+    def validate_component(
+        self,
+        category: str,
+        component: str,
+    ) -> None:
+        component_list = SysFSThinkLMI.list_components(
+            category=category,
+            base_path=self.base_path,
+        )
+
+        if component not in component_list:
+            raise SysFSThinkLMIError(
+                f"Component {component} does not exist. "
+                f"List of valid components: {component_list}"
+        )

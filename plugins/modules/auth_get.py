@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import annotations
-
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (
@@ -25,10 +23,6 @@ def main():
                 "required": True,
                 "choices": AUTH_READ_PROPERTIES,
             },
-            "value": {
-                "type": "str",
-                "required": True,
-            },
             "base_path": {
                 "type": "str",
                 "required": False,
@@ -44,11 +38,10 @@ def main():
         component = module.params["component"]
         property_name = module.params.get("property")
 
-        result = client.write_value(
+        result = client.read_value(
             category=category,
             component=component,
             property_name=property_name,
-            value=module.params.get("value")
         )
         module.exit_json(
             changed=False,

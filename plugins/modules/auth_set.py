@@ -24,7 +24,7 @@ def main():
                 "choices": AUTH_WRITE_PROPERTIES
             },
             "value": {
-                "type": str,
+                "type": "str",
                 "required": True
             },
             "base_path": {
@@ -50,7 +50,7 @@ def main():
             value=value
         )
         module.exit_json(
-            changed=False,
+            changed=True,
             component=component,
             property=property_name,
             result=result

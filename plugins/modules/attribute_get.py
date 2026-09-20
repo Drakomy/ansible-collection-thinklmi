@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from __future__ import annotations
-
 from ansible.module_utils.basic import AnsibleModule
 
 from ansible_collections.drakomy.thinklmi.plugins.module_utils.thinklmi import (
@@ -38,18 +36,11 @@ def main():
         component = module.params["component"]
         property_name = module.params.get("property")
 
-        component_list = SysFSThinkLMI.list_components(
+        client.validate_component(
+            client=client,
             category=category,
-            base_path=module.params["base_path"],
+            component=component
         )
-
-        if component not in component_list:
-            module.fail_json(
-                msg=(
-                    f"Component {component} does not exist. "
-                    f"List of valid components: {component_list}"
-                )
-            )
 
         result = client.read_value(
             category=category,
