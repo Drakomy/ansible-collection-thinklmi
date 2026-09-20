@@ -42,7 +42,7 @@ def main():
                 "default": SysFSThinkLMI.BASE_PATH
             },
         },
-        supports_check_mode=True,
+        supports_check_mode=False,
     )
 
     try:
@@ -53,7 +53,6 @@ def main():
         value = module.params.get("value")
 
         client.validate_component(
-            client= client,
             category=category,
             component=component)
 
@@ -64,7 +63,7 @@ def main():
             value=value
         )
 
-        result = client.write_value(
+        client.write_value(
             category=category,
             component=component,
             property_name=property_name,
@@ -74,7 +73,7 @@ def main():
             changed=True,
             component=component,
             property=property_name,
-            result=result
+            value=value
         )
     except SysFSThinkLMIError as e:
         module.fail_json(msg=str(e))

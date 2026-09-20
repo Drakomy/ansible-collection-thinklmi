@@ -33,7 +33,7 @@ def main():
                 "default": SysFSThinkLMI.BASE_PATH
             },
         },
-        supports_check_mode=True,
+        supports_check_mode=False,
     )
 
     try:
@@ -43,7 +43,7 @@ def main():
         property_name = module.params.get("property")
         value= module.params.get("value")
 
-        result = client.write_value(
+        client.write_value(
             category=category,
             component=component,
             property_name=property_name,
@@ -52,8 +52,7 @@ def main():
         module.exit_json(
             changed=True,
             component=component,
-            property=property_name,
-            result=result
+            property=property_name
         )
     except SysFSThinkLMIError as e:
         module.fail_json(msg=str(e))

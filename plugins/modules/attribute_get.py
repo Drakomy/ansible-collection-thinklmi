@@ -37,7 +37,6 @@ def main():
         property_name = module.params.get("property")
 
         client.validate_component(
-            client=client,
             category=category,
             component=component
         )
