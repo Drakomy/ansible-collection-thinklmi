@@ -63,18 +63,32 @@ def main():
             value=value
         )
 
-        client.write_value(
+        curr_value = client.read_value(
             category=category,
             component=component,
-            property_name=property_name,
-            value=value
+            property_name=property_name
         )
-        module.exit_json(
-            changed=True,
-            component=component,
-            property=property_name,
-            value=value
-        )
+
+        if curr_value == value:
+            module.exit_json(
+                changed=False,
+                component=component,
+                property=property_name,
+                value=value
+            )
+        else:
+            client.write_value(
+                category=category,
+                component=component,
+                property_name=property_name,
+                value=value
+            )
+            module.exit_json(
+                changed=True,
+                component=component,
+                property=property_name,
+                value=value
+            )
     except SysFSThinkLMIError as e:
         module.fail_json(msg=str(e))
 
